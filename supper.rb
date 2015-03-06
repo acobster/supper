@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 
-puts 'pretend error message! oh nooo' if File.exists? './foo'
+SUPPER_ROOT = Dir.pwd
 
+require File.join SUPPER_ROOT, 'autoload'
 
-# Just get every lib ever
-# Dir.glob( 'lib/**/*.rb' ).each do |file|
-#   require Dir.pwd+'/'+file
-# end
-
-
+config = Supper::Config.new 'config.yml'
+supper = Supper::Base.new config
+supper.update_shopify_supplier_inventory!

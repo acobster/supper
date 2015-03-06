@@ -1,3 +1,4 @@
 .guardrc
 .rspec
 .env
+config.yml

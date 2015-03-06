@@ -9,7 +9,8 @@
 #                          installed the spring binstubs per the docs)
 #  * zeus: 'zeus rspec' (requires the server to be started separetly)
 #  * 'just' rspec: 'rspec'
-guard :rspec, cmd: 'rspec' do
-  watch(%r{^spec/.+_spec.rb$}) { |m| m[0] }
+guard :rspec, cmd: 'rspec', notification: true do
+  watch(%r{^spec/.+_spec\.rb$}) { |m| m[0] }
+  watch(%r{lib/supper/([a-z_]+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
 end
 

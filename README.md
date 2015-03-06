@@ -5,3 +5,4 @@ Supper lets you store inventory levels for multiple products in Shopify Product 
 Supper is written in Ruby and uses [the official Shopify API gem](https://github.com/Shopify/shopify_api).
 
 ![Sequence Diagram](https://raw.githubusercontent.com/acobster/supper/master/doc/images/sequence-diagram.png)
+
