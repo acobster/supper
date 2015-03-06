@@ -3,6 +3,8 @@ require 'shopify_api'
 require 'supper/collection'
 require 'supper/config'
 require 'supper/supplier_feed'
+require 'supper/csv_feed'
+require 'supper/txt_feed'
 require 'supper/inventory'
 require 'supper/variant'
 
