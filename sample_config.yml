@@ -9,7 +9,7 @@ suppliers:
     inventory_format: txt
     delim: "\t"
     sku_field: 0 # SKU is in the first column of each line of text
-    quantity_field: 3 # Quantity
+    quantity_field: 3 # Quantity is the fourth column
   janes:
     ftp_user: janes_client
     ftp_password: asdf1234
