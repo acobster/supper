@@ -14,7 +14,7 @@ module Supper
       self.initial_policy = variant.inventory_policy
     end
 
-    def update_policy! available
+    def update_drop_ship_availability! available
       policy = available ?
         POLICY_DROP_SHIP_AVAILABLE :
         POLICY_DROP_SHIP_NOT_AVAILABLE
@@ -24,6 +24,8 @@ module Supper
         @variant.inventory_policy = policy
         @variant.save!
       end
+
+      true
     end
 
 

@@ -50,13 +50,28 @@ RSpec.describe Supper::Variant do
     end
   end
 
-  describe '#update_policy!' do
+  describe '#update_drop_ship_availability!' do
+    let(:available) { Supper::Variant::POLICY_DROP_SHIP_AVAILABLE }
+    let(:unavailable) { Supper::Variant::POLICY_DROP_SHIP_NOT_AVAILABLE }
+
     context 'when drop-ship availability has changed' do
-      it 'calls #save!'
+      it 'calls #save!' do
+        expect_any_instance_of( ShopifyAPI::Variant ).to receive( :save! ).
+          once.
+          and_return( true )
+
+        expect( variant.inventory_policy ).to eq unavailable
+        saved = variant.update_drop_ship_availability! true
+        expect( saved ).to be true
+      end
     end
 
     context 'when drop-ship availability has not changed' do
-      it 'does not call #save!'
+      it 'does not call #save!' do
+        expect_any_instance_of( ShopifyAPI::Variant ).not_to receive :save!
+        saved = variant.update_drop_ship_availability! false # unavailable
+        expect( saved ).to be true
+      end
     end
   end
 end
