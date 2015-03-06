@@ -1,0 +1,31 @@
+--- !ruby/object:ShopifyAPI::SmartCollection
+attributes: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+  body_html: Products that rely on automatic feed info from suppliers for up-to-date
+    inventory.
+  disjunctive: true
+  handle: test-collection
+  id: 30147188
+  products_count: 2
+  published_at:
+  published_scope: web
+  sort_order: alpha-asc
+  template_suffix:
+  title: Feedable Products
+  updated_at: '2015-03-01T13:40:28-08:00'
+  rules:
+  - !ruby/object:ShopifyAPI::Rule
+    attributes: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+      column: tag
+      relation: equals
+      condition: ESS
+    prefix_options: {}
+    persisted: true
+  - !ruby/object:ShopifyAPI::Rule
+    attributes: !ruby/hash:ActiveSupport::HashWithIndifferentAccess
+      column: tag
+      relation: equals
+      condition: Ocean Avenue
+    prefix_options: {}
+    persisted: true
+prefix_options: {}
+persisted: true

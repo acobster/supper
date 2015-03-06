@@ -10,6 +10,7 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separetly)
 #  * 'just' rspec: 'rspec'
 guard :rspec, cmd: 'rspec', notification: true do
+  watch('spec/spec_helper.rb') { |m| 'spec' }
   watch(%r{^spec/.+_spec\.rb$}) { |m| m[0] }
   watch(%r{lib/supper/([a-z_]+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
 end
