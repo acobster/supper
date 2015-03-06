@@ -4,7 +4,7 @@ suppliers:
   bobs:
     ftp_user: bobs_client
     ftp_password: password
-    ftp_inventory_file: 'Inventory/InventoryWeb.txt'
+    ftp_inventory_file: "Inventory/InventoryWeb.txt"
     shopify_tag: Bob
     inventory_format: txt
     delim: "\t"
@@ -13,7 +13,7 @@ suppliers:
   janes:
     ftp_user: janes_client
     ftp_password: asdf1234
-    ftp_inventory_file: 'janes_inventory.csv'
+    ftp_inventory_file: "janes_inventory.csv"
     shopify_tag: Jane
     inventory_format: csv
 shopify:

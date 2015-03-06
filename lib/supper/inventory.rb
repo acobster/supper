@@ -1,8 +1,19 @@
 module Supper
   class Inventory
-    def initialize filename='config.yml'
-      path = File.join( Dir.pwd, filename )
-      @config = RecursiveOpenStruct.new( YAML.load(File.read(path)) )
+    def self.build supplier_info
+      inventory = ::Supper::Inventory.new
+      supplier_info.each do |supplier|
+        feed = SupplierFeed.build supplier
+        inventory.add_feed feed
+      end
+    end
+
+    def initialize
+      @feeds = []
+    end
+
+    def add_feed feed
+      @feeds << feed
     end
   end
 end

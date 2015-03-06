@@ -19,18 +19,15 @@ module Supper
 
     def update_shopify_supplier_inventory!
       # Get Shopify Products via Collection API
-      products = Product.get_variants_from_collection @config.shopify.collection_id,
+      variants = Collection.get_variants @config.shopify.collection_id,
         @config.shopify.collection_type.to_sym
 
       # Get supplier inventory from all feeds
-      inventory = SupplierInventory.new
-      @config.suppliers.each do |supplier|
-        inventory.add_feed supplier
-      end
+      inventory = Inventory.build @config.suppliers
       inventory.compile!
 
-      # Update each product based on inventory
-      products.each do |product|
+      # Update each product/variant based on inventory
+      variants.each do |variant|
 
       end
     end
