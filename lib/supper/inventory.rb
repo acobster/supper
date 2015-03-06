@@ -1,7 +1,7 @@
 module Supper
   class Inventory
     def self.build supplier_info
-      inventory = ::Supper::Inventory.new
+      inventory = Inventory.new
       supplier_info.each do |supplier|
         feed = SupplierFeed.build supplier
         inventory.add_feed feed

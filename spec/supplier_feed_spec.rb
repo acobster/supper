@@ -1,4 +1,7 @@
 require 'spec_helper'
+require 'supper/supplier_feed'
+require 'supper/csv_feed'
+require 'supper/txt_feed'
 
 RSpec::describe Supper::SupplierFeed do
   describe 'class methods' do

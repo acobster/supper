@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
-SUPPER_ROOT = Dir.pwd
+require_relative 'load_path.rb'
 
-require File.join SUPPER_ROOT, 'autoload'
+require 'supper/base'
+require 'supper/config'
 
 config = Supper::Config.new 'config.yml'
 supper = Supper::Base.new config

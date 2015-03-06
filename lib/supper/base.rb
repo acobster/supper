@@ -1,5 +1,11 @@
 require 'shopify_api'
 
+require 'supper/collection'
+require 'supper/config'
+require 'supper/supplier_feed'
+require 'supper/inventory'
+require 'supper/variant'
+
 module Supper
   class Base
     APP_TYPE_PRIVATE = 'private'
