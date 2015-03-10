@@ -21,9 +21,10 @@ RSpec::describe Supper::SupplierFeed do
     feed.ftp_user = ftp_user
     feed.ftp_password = ftp_password
     feed.remote_file = remote_file
-    feed.delim = delim
     feed.sku_field = sku_field
     feed.quantity_field = quantity_field
+
+    feed
   end
 
   describe 'class methods' do
@@ -61,19 +62,19 @@ RSpec::describe Supper::SupplierFeed do
   end
 
   describe '#copy_inventory_file' do
-    # it 'copies the file locally' do
-    #   # control what the local file is called
-    #   expect( Dir::Tmpname ).to receive( :make_tmpname ).once.
-    #     with( 'tmp/', '' ).and_return( local_file )
+    it 'copies the file locally' do
+      # control what the local file is called
+      expect( Dir::Tmpname ).to receive( :make_tmpname ).once.
+        with( 'tmp/', '' ).and_return( local_file )
 
-    #   ftp = double('ftp')
-    #   expect( ftp ).to receive( :connect ).once.with( ftp_host )
-    #   expect( ftp ).to receive( :passive= ).once.with( true )
-    #   expect( ftp ).to receive( :login ).once.with( ftp_user, ftp_pass )
-    #   expect( ftp ).to receive( :gettextfile ).once.with( remote_file, local_file )
+      ftp = double('ftp')
+      expect( ftp ).to receive( :connect ).once.with( ftp_host )
+      expect( ftp ).to receive( :passive= ).once.with( true )
+      expect( ftp ).to receive( :login ).once.with( ftp_user, ftp_password )
+      expect( ftp ).to receive( :gettextfile ).once.with( remote_file, local_file )
 
-    #   feed.copy_inventory_file ftp
-    # end
+      feed.copy_inventory_file ftp
+    end
   end
 
   describe '#read' do

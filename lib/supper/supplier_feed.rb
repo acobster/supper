@@ -43,10 +43,10 @@ module Supper
     end
 
     def copy_inventory_file ftp
-      ftp.connect @host
+      ftp.connect ftp_host
       ftp.passive = true
-      ftp.login @user, @pass
-      ftp.gettextfile @remote_file, @local_file
+      ftp.login ftp_user, ftp_password
+      ftp.gettextfile remote_file, @local_file
     end
   end
 end
