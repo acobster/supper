@@ -8,4 +8,5 @@ group :local do
   gem 'guard'
   gem 'guard-rspec'
   gem 'growl'
+  gem 'debugger'
 end
