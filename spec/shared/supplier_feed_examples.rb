@@ -15,7 +15,7 @@ RSpec.shared_examples_for 'a SupplierFeed' do
         with( 'tmp/', '' ).and_return( local_file )
 
       ftp = double('ftp')
-      expect( ftp ).to receive( :connect ).once.with( ftp_host )
+      expect( ftp ).to receive( :connect ).once.with( ftp_host, ftp_port )
       expect( ftp ).to receive( :passive= ).once.with( true )
       expect( ftp ).to receive( :login ).once.with( ftp_user, ftp_password )
       expect( ftp ).to receive( :gettextfile ).once.with( remote_file, local_file )

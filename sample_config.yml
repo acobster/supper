@@ -3,6 +3,7 @@
 suppliers:
   bobs:
     ftp_host: ftp.bobs.com
+    ftp_port: 212121
     ftp_user: bobs_client
     ftp_password: password
     ftp_inventory_file: "Inventory/InventoryWeb.txt"
@@ -13,6 +14,7 @@ suppliers:
     quantity_field: 3 # Quantity is the fourth column
   janes:
     ftp_host: ftp.janes.com
+    # port defaults to 21
     ftp_user: janes_client
     ftp_password: asdf1234
     ftp_inventory_file: "janes_inventory.csv"

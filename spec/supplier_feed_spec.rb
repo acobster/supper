@@ -8,6 +8,7 @@ RSpec::describe Supper::SupplierFeed do
   include_context 'suppliers'
 
   let(:ftp_host) { 'host.domain.com' }
+  let(:ftp_port) { 212121 }
   let(:ftp_user) { 'user' }
   let(:ftp_password) { 'pass' }
   let(:remote_file) { 'remote_file' }
@@ -27,6 +28,7 @@ RSpec::describe Supper::SupplierFeed do
       OpenStruct.new({
         inventory_format: format,
         ftp_host: ftp_host,
+        ftp_port: ftp_port,
         ftp_user: ftp_user,
         ftp_password: ftp_password,
         remote_file: remote_file,

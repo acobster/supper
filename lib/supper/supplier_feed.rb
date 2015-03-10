@@ -6,8 +6,10 @@ module Supper
     SUPPORTED_FORMATS = [:txt, :csv]
     EXTENSION = ''
     PREFIX = 'tmp/'
+    DEFAULT_PORT = 21
 
     attr_accessor :ftp_host
+    attr_accessor :ftp_port
     attr_accessor :ftp_user
     attr_accessor :ftp_password
     attr_accessor :remote_file
@@ -35,6 +37,7 @@ module Supper
 
     def configure info
       self.ftp_host = info.ftp_host
+      self.ftp_port = info.ftp_port || DEFAULT_PORT
       self.ftp_user = info.ftp_user
       self.ftp_password = info.ftp_password
       self.remote_file = info.remote_file
@@ -44,7 +47,7 @@ module Supper
     end
 
     def copy_inventory_file ftp
-      ftp.connect ftp_host
+      ftp.connect ftp_host, ftp_port
       ftp.passive = true
       ftp.login ftp_user, ftp_password
       ftp.gettextfile remote_file, @local_file
