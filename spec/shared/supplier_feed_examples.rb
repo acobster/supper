@@ -25,7 +25,7 @@ RSpec.shared_examples_for 'a SupplierFeed' do
   end
 
   describe '#read' do
-    it 'returns a hash' do
+    it 'returns a hash of the form { SKU => Quantity, ... }' do
       expect( File ).to receive(:read).once.and_return( raw_inventory )
 
       supplier_inventory = feed.read

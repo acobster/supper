@@ -17,9 +17,9 @@ module Supper
       inventory = {}
 
       raw.lines.each do |line|
-        fields = line.split delim
-        sku = line[sku_field]
-        quantity = line[quantity_field]
+        product = line.split delim
+        sku = product[sku_field]
+        quantity = product[quantity_field].gsub(/\D+/, '').to_i
         inventory[sku] = quantity
       end
 

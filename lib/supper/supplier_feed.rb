@@ -17,16 +17,7 @@ module Supper
     def self.build info
       klass = class_to_build( info.inventory_format )
       return nil unless klass
-      feed = klass.new
-
-      feed.ftp_host = info.ftp_host
-      feed.ftp_user = info.ftp_user
-      feed.ftp_password = info.ftp_password
-      feed.remote_file = info.remote_file
-      feed.sku_field = info.sku_field
-      feed.quantity_field = info.quantity_field
-
-      feed
+      klass.new.configure info
     end
 
     def self.class_to_build format
@@ -40,6 +31,16 @@ module Supper
 
     def initialize
       @local_file = Dir::Tmpname.make_tmpname PREFIX, EXTENSION
+    end
+
+    def configure info
+      self.ftp_host = info.ftp_host
+      self.ftp_user = info.ftp_user
+      self.ftp_password = info.ftp_password
+      self.remote_file = info.remote_file
+      self.sku_field = info.sku_field
+      self.quantity_field = info.quantity_field
+      self
     end
 
     def copy_inventory_file ftp

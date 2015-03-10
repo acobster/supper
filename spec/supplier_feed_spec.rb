@@ -21,7 +21,7 @@ RSpec::describe Supper::SupplierFeed do
   context 'when format is TXT' do
     let(:sku_field) { 0 }
     let(:quantity_field) { 3 }
-    let(:delim) { '\t' }
+    let(:delim) { "\t" }
 
     let(:config) {
       OpenStruct.new({
