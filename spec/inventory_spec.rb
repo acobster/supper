@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'supper/inventory'
 
 RSpec.describe Supper::Inventory do
   include_context 'suppliers'

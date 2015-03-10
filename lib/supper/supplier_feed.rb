@@ -1,13 +1,19 @@
 require 'net/ftp'
+require 'tempfile'
 
 module Supper
   class SupplierFeed
     SUPPORTED_FORMATS = [:txt, :csv]
+    EXTENSION = ''
+    PREFIX = 'tmp/'
 
     def self.build info
       klass = class_to_build( info.inventory_format )
       return nil unless klass
-      klass.new info.ftp_user, info.ftp_password, info.ftp_inventory_file
+      klass.new info.ftp_host,
+        info.ftp_user,
+        info.ftp_password,
+        info.ftp_inventory_file
     end
 
     def self.class_to_build format
@@ -19,11 +25,19 @@ module Supper
       Supper.const_get format.to_s.capitalize+'Feed'
     end
 
-    def initialize ftp_user, ftp_pass, inventory_file, passive_mode=true
-      @ftp_user = ftp_user
-      @ftp_pass = ftp_pass
-      @inventory_file = inventory_file
-      @passive_mode = passive_mode
+    def initialize host, user, pass, remote_file
+      @host = host
+      @user = user
+      @pass = pass
+      @remote_file = remote_file
+      @local_file = Dir::Tmpname.make_tmpname PREFIX, EXTENSION
+    end
+
+    def copy_inventory_file ftp
+      ftp.connect @host
+      ftp.passive = true
+      ftp.login @user, @pass
+      ftp.gettextfile @remote_file, @local_file
     end
   end
 end

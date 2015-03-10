@@ -1,3 +1,5 @@
+require 'supper/supplier_feed'
+
 module Supper
   class Inventory
     def self.build supplier_info
@@ -10,6 +12,15 @@ module Supper
 
     def initialize
       @feeds = []
+    end
+
+    def compile!
+      @feeds.each do |feed|
+        read_into_compiled feed
+      end
+    end
+
+    def read_into_compiled feed
     end
 
     def add_feed feed

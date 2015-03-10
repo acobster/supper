@@ -2,6 +2,7 @@
 # Example Supper Configuration
 suppliers:
   bobs:
+    ftp_host: ftp.bobs.com
     ftp_user: bobs_client
     ftp_password: password
     ftp_inventory_file: "Inventory/InventoryWeb.txt"
@@ -11,6 +12,7 @@ suppliers:
     sku_field: 0 # SKU is in the first column of each line of text
     quantity_field: 3 # Quantity is the fourth column
   janes:
+    ftp_host: ftp.janes.com
     ftp_user: janes_client
     ftp_password: asdf1234
     ftp_inventory_file: "janes_inventory.csv"
