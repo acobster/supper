@@ -30,7 +30,7 @@
         position: 1
         price: '24.00'
         requires_shipping: true
-        sku: ''
+        sku: 'ASDF'
         taxable: true
         title: 33 / Black
         updated_at: '2015-03-02T09:35:18-08:00'
@@ -58,7 +58,7 @@
         position: 2
         price: '24.00'
         requires_shipping: true
-        sku: ''
+        sku: 'SDFG'
         taxable: true
         title: 33 / Red
         updated_at: '2015-03-01T15:38:31-08:00'
@@ -86,7 +86,7 @@
         position: 3
         price: '24.50'
         requires_shipping: true
-        sku: ''
+        sku: 'DFGH'
         taxable: true
         title: 44 / Black
         updated_at: '2015-03-01T15:38:31-08:00'
@@ -114,7 +114,7 @@
         position: 4
         price: '24.50'
         requires_shipping: true
-        sku: ''
+        sku: 'QWERTY1234'
         taxable: true
         title: 44 / Red
         updated_at: '2015-03-01T15:38:31-08:00'
@@ -142,7 +142,7 @@
         position: 5
         price: '25.99'
         requires_shipping: true
-        sku: ''
+        sku: 'POIUYR-0987'
         taxable: true
         title: 55 / Black
         updated_at: '2015-03-01T15:38:31-08:00'
@@ -170,7 +170,7 @@
         position: 6
         price: '25.99'
         requires_shipping: true
-        sku: ''
+        sku: 'FOO BAR'
         taxable: true
         title: 55 / Red
         updated_at: '2015-03-01T15:38:31-08:00'

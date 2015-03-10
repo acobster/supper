@@ -21,8 +21,7 @@ module Supper
       end
 
       cred = "#{shop.api_key}:#{shop.api_password}@#{shop.shop_name}"
-      ShopifyAPI::Base.site =
-        "https://#{cred}.myshopify.com/admin"
+      ShopifyAPI::Base.site = "https://#{cred}.myshopify.com/admin"
     end
 
     def update_shopify_supplier_inventory!
@@ -32,11 +31,15 @@ module Supper
 
       # Get supplier inventory from all feeds
       inventory = Inventory.build @config.suppliers
-      inventory.compile!
+      inventory.fetch_all!
+      inventory.compile
 
       # Update each product/variant based on inventory
       variants.each do |variant|
-
+        unless variant.sku.empty?
+          available = inventory[variant.sku] > 0
+          variant.update_drop_ship_availability! available
+        end
       end
     end
   end
