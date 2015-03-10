@@ -4,8 +4,8 @@ module Supper
   class CsvFeed < SupplierFeed
     EXTENSION = '.csv'
 
-    def get_inventory
-
+    def read
+      {}
     end
   end
 end

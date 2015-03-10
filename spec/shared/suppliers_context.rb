@@ -18,7 +18,7 @@ RSpec.shared_context 'suppliers' do
     }
   end
 
-  let(:text_inventory_txt) do
+  let(:raw_inventory_txt) do
     <<-_TXT_
 02COM0ASMB0000  ASSEMBLE COMPLETE 3 685 0.04  ASSEMBLE COMPLETE   0
 02COM0NASM0000  NON-ASSEMBLED COMPLETE  0 1,087 0.04  NON-ASSEMBLED COMPLETE    0
@@ -31,5 +31,8 @@ RSpec.shared_context 'suppliers' do
 1AALM0THST100KK ALM THAI STICK 1" ALLEN HARDWARE single set 2 0 0.12  ALMOST THAI STICK   0
 1AALMBOLTS0870A ALM NUTS & BOLTS 7/8"ALLEN HARDWARE single set  2.25  23  0.12  ALMOST NUTS & BOLTS HARDWARE 7/8" PHILLIPS    0
     _TXT_
+  end
+
+  let(:raw_inventory_csv) do
   end
 end

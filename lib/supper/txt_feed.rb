@@ -4,8 +4,8 @@ module Supper
   class TxtFeed < SupplierFeed
     EXTENSION = '.txt'
 
-    def get_inventory
-
+    def read
+      {}
     end
   end
 end
