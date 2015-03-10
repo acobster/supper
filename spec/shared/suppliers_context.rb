@@ -5,16 +5,16 @@ RSpec.shared_context 'suppliers' do
 
   let(:inventory_hash) do
     {
-      '02COM0ASMB0000' => 0,
-      '02COM0NASM0000' => 2,
-      '02GRIPINST0000' => 123,
-      '08000TRNSF0000' => 5,
-      '0PCLI0KSBC0000' => 5,
-      '0PCLI0KSCU0000' => 456,
-      '0PCLI0KSPO0000' => 568,
-      '1AALM0THST087K' => 987,
-      '1AALM0THST100K' => 35,
-      '1AALMBOLTS0870' => 4,
+      '02COM0ASMB0000' => 685,
+      '02COM0NASM0000' => 1087,
+      '02GRIPINST0000' => 762,
+      '08000TRNSF0000' => 326,
+      '0PCLI0KSBC0000' => 6,
+      '0PCLI0KSCU0000' => 36,
+      '0PCLI0KSPO0000' => 75,
+      '1AALM0THST087K' => 36,
+      '1AALM0THST100K' => 0,
+      '1AALMBOLTS0870' => 23,
     }
   end
 
