@@ -5,26 +5,41 @@ module Supper
     def self.build supplier_info
       inventory = Inventory.new
       supplier_info.each do |supplier|
-        feed = SupplierFeed.build supplier
-        inventory.add_feed feed
+        inventory.add_feed SupplierFeed.build(supplier)
       end
+      inventory
     end
 
-    def initialize
+    def initialize hash={}
       @feeds = []
+      @compiled = hash
     end
 
-    def compile!
-      @feeds.each do |feed|
-        read_into_compiled feed
+    def fetch_all!
+      @feeds.each { |f| f.copy_inventory_file! }
+    end
+
+    def compile
+      @feeds.inject({}) do |compiled, feed|
+        feed.read.each do |sku, quantity|
+          self[sku] = self[sku] + quantity
+        end
       end
-    end
-
-    def read_into_compiled feed
     end
 
     def add_feed feed
       @feeds << feed
+    end
+
+    def [] sku
+      @compiled[sku].to_i
+    end
+
+
+    protected
+
+    def []= sku, quantity
+      @compiled[sku] = quantity
     end
   end
 end

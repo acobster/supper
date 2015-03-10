@@ -46,7 +46,7 @@ module Supper
       self
     end
 
-    def copy_inventory_file ftp
+    def copy_inventory_file! ftp=Net::FTP.new
       ftp.connect ftp_host, ftp_port
       ftp.passive = true
       ftp.login ftp_user, ftp_password

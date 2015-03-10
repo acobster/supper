@@ -8,7 +8,7 @@ RSpec.shared_examples_for 'a SupplierFeed' do
     end
   end
 
-  describe '#copy_inventory_file' do
+  describe '#copy_inventory_file!' do
     it 'copies the file locally' do
       # control what the local file is called
       expect( Dir::Tmpname ).to receive( :make_tmpname ).once.
@@ -20,7 +20,7 @@ RSpec.shared_examples_for 'a SupplierFeed' do
       expect( ftp ).to receive( :login ).once.with( ftp_user, ftp_password )
       expect( ftp ).to receive( :gettextfile ).once.with( remote_file, local_file )
 
-      feed.copy_inventory_file ftp
+      feed.copy_inventory_file! ftp
     end
   end
 
