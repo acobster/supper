@@ -7,13 +7,26 @@ module Supper
     EXTENSION = ''
     PREFIX = 'tmp/'
 
+    attr_accessor :ftp_host
+    attr_accessor :ftp_user
+    attr_accessor :ftp_password
+    attr_accessor :remote_file
+    attr_accessor :sku_field
+    attr_accessor :quantity_field
+
     def self.build info
       klass = class_to_build( info.inventory_format )
       return nil unless klass
-      klass.new info.ftp_host,
-        info.ftp_user,
-        info.ftp_password,
-        info.ftp_inventory_file
+      feed = klass.new
+
+      feed.ftp_host = info.ftp_host
+      feed.ftp_user = info.ftp_user
+      feed.ftp_password = info.ftp_password
+      feed.remote_file = info.remote_file
+      feed.sku_field = info.sku_field
+      feed.quantity_field = info.quantity_field
+
+      feed
     end
 
     def self.class_to_build format
@@ -25,11 +38,7 @@ module Supper
       Supper.const_get format.to_s.capitalize+'Feed'
     end
 
-    def initialize host, user, pass, remote_file
-      @host = host
-      @user = user
-      @pass = pass
-      @remote_file = remote_file
+    def initialize
       @local_file = Dir::Tmpname.make_tmpname PREFIX, EXTENSION
     end
 
