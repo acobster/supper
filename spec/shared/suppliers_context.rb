@@ -3,7 +3,7 @@ RSpec.shared_context 'suppliers' do
   let(:supplier_bob) { double('supplier_bob') }
   let(:supplier_jane) { double('supplier_jane') }
 
-  let(:text_inventory_hash) do
+  let(:inventory_hash) do
     {
       '02COM0ASMB0000' => 0,
       '02COM0NASM0000' => 2,

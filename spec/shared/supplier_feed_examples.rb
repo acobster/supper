@@ -31,7 +31,7 @@ RSpec.shared_examples_for 'a SupplierFeed' do
       supplier_inventory = feed.read
       expect( supplier_inventory ).to be_a Hash
 
-      text_inventory_hash.each do |sku, quantity|
+      inventory_hash.each do |sku, quantity|
         expect( supplier_inventory[sku] ).to eq quantity
       end
     end
