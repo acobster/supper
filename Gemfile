@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'shopify_api'
-gem 'recursive-open-struct'
 
 group :local do
   gem 'rspec'
