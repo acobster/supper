@@ -15,5 +15,6 @@ guard :rspec, cmd: 'rspec', notification: true do
   watch(%r{^lib/supper/([a-z_]+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^lib/supper/(csv|txt)_feed.rb$}) { |m| 'spec/supplier_feed_spec.rb' }
   watch(%r{^spec/shared/(suppliers_context|supplier_feed_examples).rb$}) { |m| 'spec/supplier_feed_spec.rb' }
+  watch('spec/shared/config_context.rb') { 'spec/config_spec.rb' }
 end
 
