@@ -2,3 +2,4 @@
 .rspec
 .env
 config.yml
+log/*

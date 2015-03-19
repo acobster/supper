@@ -10,6 +10,7 @@ module Supper
 
     def initialize variant, product
       @variant = variant
+      @updated = false
       self.product = product
       self.initial_policy = variant.inventory_policy
     end
@@ -23,9 +24,10 @@ module Supper
       if policy != @variant.inventory_policy
         @variant.inventory_policy = policy
         @variant.save!
+        @updated = true
       end
 
-      true
+      @updated
     end
 
 
@@ -39,6 +41,16 @@ module Supper
 
     def tagged_with? tag
       tags.include? tag
+    end
+
+    def to_h
+      {
+        sku: sku,
+        product_id: product_id,
+        initial_policy: initial_policy,
+        current_policy: inventory_policy,
+        updated: @updated,
+      }
     end
   end
 end

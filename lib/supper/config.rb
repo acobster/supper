@@ -1,13 +1,17 @@
 require 'yaml'
-require 'recursive-open-struct'
 
 module Supper
   class Config
-    def initialize filename='config.yml'
-      path = File.exists?(filename) ?
+    def self.load_from_file filename='config.yml'
+      yaml = File.read File.exists?(filename) ?
         filename :
         File.join( Dir.pwd, filename )
-      @config = RecursiveOpenStruct.new( YAML.load(File.read(path)) )
+
+      Config.new yaml
+    end
+
+    def initialize yaml
+      @config = YAML.load yaml
     end
 
     def method_missing meth, *args

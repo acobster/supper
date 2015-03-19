@@ -4,7 +4,7 @@ module Supper
   class Inventory
     def self.build supplier_info
       inventory = Inventory.new
-      supplier_info.each do |supplier|
+      supplier_info.to_hash.each do |k, supplier|
         inventory.add_feed SupplierFeed.build(supplier)
       end
       inventory
@@ -22,7 +22,7 @@ module Supper
     def compile
       @feeds.inject({}) do |compiled, feed|
         feed.read.each do |sku, quantity|
-          self[sku] = self[sku] + quantity
+          self[sku] = (self[sku] || 0) + quantity
         end
       end
     end
@@ -32,7 +32,14 @@ module Supper
     end
 
     def [] sku
-      @compiled[sku].to_i
+      @compiled[sku]
+    end
+
+    def to_h
+      {
+        quantities: @compiled,
+        feeds: @feeds.map(&:to_h),
+      }
     end
 
 

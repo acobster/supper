@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'supper/variant'
 
 RSpec.describe Supper::Variant do
   include_context 'products'
@@ -70,7 +71,7 @@ RSpec.describe Supper::Variant do
       it 'does not call #save!' do
         expect_any_instance_of( ShopifyAPI::Variant ).not_to receive :save!
         saved = variant.update_drop_ship_availability! false # unavailable
-        expect( saved ).to be true
+        expect( saved ).to be false
       end
     end
   end

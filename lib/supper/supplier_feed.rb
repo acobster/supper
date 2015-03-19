@@ -17,8 +17,8 @@ module Supper
     attr_accessor :quantity_field
 
     def self.build info
-      klass = class_to_build( info.inventory_format )
-      return nil unless klass
+      klass = class_to_build( info['inventory_format'] )
+      raise "format not supported: #{info['inventory_format']}" unless klass
       klass.new.configure info
     end
 
@@ -33,16 +33,17 @@ module Supper
 
     def initialize
       @local_file = Dir::Tmpname.make_tmpname PREFIX, EXTENSION
+      @file_copied
     end
 
     def configure info
-      self.ftp_host = info.ftp_host
-      self.ftp_port = info.ftp_port || DEFAULT_PORT
-      self.ftp_user = info.ftp_user
-      self.ftp_password = info.ftp_password
-      self.remote_file = info.remote_file
-      self.sku_field = info.sku_field
-      self.quantity_field = info.quantity_field
+      self.ftp_host = info['ftp_host']
+      self.ftp_port = info['ftp_port'] || DEFAULT_PORT
+      self.ftp_user = info['ftp_user']
+      self.ftp_password = info['ftp_password']
+      self.remote_file = info['remote_file']
+      self.sku_field = info['sku_field']
+      self.quantity_field = info['quantity_field']
       self
     end
 
@@ -51,6 +52,17 @@ module Supper
       ftp.passive = true
       ftp.login ftp_user, ftp_password
       ftp.gettextfile remote_file, @local_file
+      @file_copied = true
+    end
+
+    def to_h
+      {
+        host: ftp_host,
+        port: ftp_port,
+        remote_file: remote_file,
+        sku_field: sku_field,
+        quantity_field: quantity_field,
+      }
     end
   end
 end

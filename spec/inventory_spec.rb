@@ -59,7 +59,7 @@ RSpec.describe Supper::Inventory do
         expect( Supper::SupplierFeed ).to receive(:build).once.with('jane').
           and_return( janes_feed )
 
-        i = Supper::Inventory.build ['bob', 'jane']
+        i = Supper::Inventory.build({bob: 'bob', jane: 'jane'})
         expect(i).to be_a Supper::Inventory
       end
     end
@@ -88,9 +88,9 @@ RSpec.describe Supper::Inventory do
       expect_inventory_levels_to_match compiled, inventory
     end
 
-    it 'returns 0 if SKU not found' do
+    it 'returns nil if SKU not found' do
       ['foo', :bar, 123].each do |i|
-        expect( inventory[i] ).to eq 0
+        expect( inventory[i] ).to be_nil
       end
     end
   end

@@ -25,17 +25,17 @@ RSpec::describe Supper::SupplierFeed do
     let(:delim) { "\t" }
 
     let(:config) {
-      OpenStruct.new({
-        inventory_format: format,
-        ftp_host: ftp_host,
-        ftp_port: ftp_port,
-        ftp_user: ftp_user,
-        ftp_password: ftp_password,
-        remote_file: remote_file,
-        sku_field: sku_field,
-        quantity_field: quantity_field,
-        delim: delim,
-      })
+      {
+        'inventory_format' => format,
+        'ftp_host' => ftp_host,
+        'ftp_port' => ftp_port,
+        'ftp_user' => ftp_user,
+        'ftp_password' => ftp_password,
+        'remote_file' => remote_file,
+        'sku_field' => sku_field,
+        'quantity_field' => quantity_field,
+        'delim' => delim,
+      }
     }
 
     it_behaves_like 'a SupplierFeed' do

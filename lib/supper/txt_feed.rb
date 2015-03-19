@@ -8,7 +8,7 @@ module Supper
 
     def configure info
       super info
-      self.delim = info.delim
+      self.delim = info['delim']
       self
     end
 
