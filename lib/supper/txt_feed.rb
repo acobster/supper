@@ -17,19 +17,26 @@ module Supper
       inventory = {}
 
       raw.lines.each do |line|
-        # TODO detect invalid UTF-8 instead...
         begin
+          line = encode_and_strip_invalid_chars line
           product = line.split delim
+
           sku = product[sku_field]
           # strip non-digits and convert quantity to an int
           quantity = product[quantity_field].gsub(/\D+/, '').to_i
           inventory[sku] = quantity
         rescue Exception => e
+          # TODO log something here
           next
         end
       end
 
       inventory
+    end
+
+    def encode_and_strip_invalid_chars line
+      line.encode 'UTF-8', 'binary',
+        invalid: :replace, undef: :replace, replace: ''
     end
   end
 end

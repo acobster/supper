@@ -42,6 +42,16 @@ RSpec::describe Supper::SupplierFeed do
       let(:format) { :txt }
       let(:klass) { Supper::TxtFeed }
       let(:raw_inventory) { raw_inventory_txt }
+
+      describe '#encode_and_strip_invalid_chars' do
+        subject { feed.encode_and_strip_invalid_chars invalid_line }
+
+        it 'returns raw text with bad chars stripped' do
+          expect( subject ).to eq valid_line
+        end
+
+        context 'when line is already valid'
+      end
     end
   end
 end
