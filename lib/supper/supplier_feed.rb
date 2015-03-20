@@ -33,7 +33,7 @@ module Supper
 
     def initialize
       @local_file = Dir::Tmpname.make_tmpname PREFIX, EXTENSION
-      @file_copied
+      @file_copied = false
     end
 
     def configure info
@@ -41,7 +41,7 @@ module Supper
       self.ftp_port = info['ftp_port'] || DEFAULT_PORT
       self.ftp_user = info['ftp_user']
       self.ftp_password = info['ftp_password']
-      self.remote_file = info['remote_file']
+      self.remote_file = info['ftp_inventory_file']
       self.sku_field = info['sku_field']
       self.quantity_field = info['quantity_field']
       self

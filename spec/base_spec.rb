@@ -79,6 +79,7 @@ RSpec.describe Supper::Base do
       # Logging stuff
       [variant1, variant2, variant3, variant4].each do |v|
         expect(v).to receive(:to_h).once.and_return({})
+        allow(v).to receive(:updated?).once.and_return(false) # this just
       end
       file = double('file')
       expect( File ).to receive(:open).once.and_return(file)

@@ -31,7 +31,7 @@ RSpec::describe Supper::SupplierFeed do
         'ftp_port' => ftp_port,
         'ftp_user' => ftp_user,
         'ftp_password' => ftp_password,
-        'remote_file' => remote_file,
+        'ftp_inventory_file' => remote_file,
         'sku_field' => sku_field,
         'quantity_field' => quantity_field,
         'delim' => delim,

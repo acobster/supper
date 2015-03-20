@@ -43,6 +43,10 @@ module Supper
       tags.include? tag
     end
 
+    def updated?
+      @updated
+    end
+
     def to_h
       {
         sku: sku,

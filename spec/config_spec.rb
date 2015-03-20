@@ -5,12 +5,24 @@ RSpec.describe Supper::Config do
   include_context 'config'
 
   describe '#load_from_file' do
+    let!(:stub_file) do
+      expect( File ).to receive(:exists?).
+        once.
+        with('config.yml').
+        and_return(file_exists)
+      expect( File ).to receive(:read).once.and_return('FAKE YAML')
+    end
+
+    subject { Supper::Config.load_from_file 'config.yml' }
+
     context 'when file exists at relative path' do
-      it 'returns a Config object'
+      let!(:file_exists) { true }
+      it { should be_a Supper::Config }
     end
 
     context 'when file exists at absolute path' do
-      it 'returns a Config object'
+      let!(:file_exists) { false }
+      it { should be_a Supper::Config }
     end
   end
 
@@ -29,15 +41,6 @@ RSpec.describe Supper::Config do
       expect( suppliers[1]['ftp_user'] ).to eq 'janes_client'
       expect( suppliers[1]['ftp_password'] ).to eq 'asdf1234'
       expect( suppliers[1]['shopify_tag'] ).to eq 'Jane'
-    end
-  end
-
-  describe '#validate!' do
-    subject { config.validate }
-
-    context 'when structure is valid' do
-      let(:config) { valid_config }
-      # it { should be true }
     end
   end
 end

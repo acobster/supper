@@ -17,11 +17,16 @@ module Supper
       inventory = {}
 
       raw.lines.each do |line|
-        product = line.split delim
-        sku = product[sku_field]
-        # strip non-digits and convert quantity to an int
-        quantity = product[quantity_field].gsub(/\D+/, '').to_i
-        inventory[sku] = quantity
+        # TODO detect invalid UTF-8 instead...
+        begin
+          product = line.split delim
+          sku = product[sku_field]
+          # strip non-digits and convert quantity to an int
+          quantity = product[quantity_field].gsub(/\D+/, '').to_i
+          inventory[sku] = quantity
+        rescue Exception => e
+          next
+        end
       end
 
       inventory

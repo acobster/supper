@@ -4,7 +4,7 @@ module Supper
   class Inventory
     def self.build supplier_info
       inventory = Inventory.new
-      supplier_info.to_hash.each do |k, supplier|
+      supplier_info.each do |supplier|
         inventory.add_feed SupplierFeed.build(supplier)
       end
       inventory

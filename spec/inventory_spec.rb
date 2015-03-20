@@ -59,7 +59,7 @@ RSpec.describe Supper::Inventory do
         expect( Supper::SupplierFeed ).to receive(:build).once.with('jane').
           and_return( janes_feed )
 
-        i = Supper::Inventory.build({bob: 'bob', jane: 'jane'})
+        i = Supper::Inventory.build(['bob', 'jane'])
         expect(i).to be_a Supper::Inventory
       end
     end
