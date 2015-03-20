@@ -51,6 +51,7 @@ module Supper
       {
         sku: sku,
         product_id: product_id,
+        variant_title: @variant.title,
         initial_policy: initial_policy,
         current_policy: inventory_policy,
         updated: @updated,
