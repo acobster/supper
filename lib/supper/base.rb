@@ -58,6 +58,7 @@ module Supper
       end
 
       @log[:variants] = variants.map(&:to_h)
+      puts @config['success_message'] if @config['success_message']
     rescue Exception => e
       puts "Supper encountered an error: #{e.message}"
       @log[:error] = {
