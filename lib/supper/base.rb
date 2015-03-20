@@ -14,6 +14,7 @@ module Supper
   class Base
     APP_TYPE_PRIVATE = 'private'
     TIME_FORMAT = '%F-%H%M%S'
+    DEFAULT_PRETTY_TIME_FORMAT = '%l:%M%P %F'
     DEFAULT_LOG_DIR = 'log'
 
     attr_accessor :log_dir
@@ -27,7 +28,11 @@ module Supper
       end
 
       self.log_dir = @config['log_dir'] || DEFAULT_LOG_DIR
-      @log = { time: Time.now.strftime(TIME_FORMAT) }
+      now = Time.now
+      @log = {
+        time: now.strftime(TIME_FORMAT),
+        pretty_time: now.strftime(DEFAULT_PRETTY_TIME_FORMAT),
+      }
 
       cred = "#{shop['api_key']}:#{shop['api_password']}@#{shop['shop_name']}"
       ShopifyAPI::Base.site = "https://#{cred}.myshopify.com/admin"
