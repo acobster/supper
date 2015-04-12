@@ -31,6 +31,10 @@ module Supper
     end
 
 
+    def sku
+      @variant.sku ? @variant.sku : ''
+    end
+
     def method_missing name, *args
       @variant.send name, *args
     end
