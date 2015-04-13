@@ -1,10 +1,8 @@
-require 'active_support'
-require 'active_support/core_ext'
 require 'json'
 
 module Supper
   class Summary
-    MAX_AGE = 7.days
+    MAX_AGE = 604800
     TIME_FORMAT = '%F %l:%M%P'
 
     def summarize
@@ -34,7 +32,7 @@ module Supper
     def get_recent_log_files
       files = Dir.glob File.join( Dir.pwd, 'log/*.json' )
       files.select do |file|
-        File.mtime(file) > Time.now - MAX_AGE
+        File.mtime(file) > Time.now - 604800
       end
     end
 
