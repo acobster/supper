@@ -21,6 +21,7 @@ module Supper
       else
         puts 'no errors'
       end
+      delete_files get_older_log_files
     end
 
     def get_recent_logs
@@ -29,10 +30,26 @@ module Supper
       end
     end
 
+    def get_all_log_files
+      Dir.glob File.join( Dir.pwd, 'log/*.json' )
+    end
+
     def get_recent_log_files
-      files = Dir.glob File.join( Dir.pwd, 'log/*.json' )
-      files.select do |file|
-        File.mtime(file) > Time.now - 604800
+      get_all_log_files.select do |file|
+        File.mtime(file) > Time.now - MAX_AGE 
+      end
+    end
+
+    def delete_files files
+      files.each do |file|
+        File.delete( file )
+      end
+      puts "deleted #{files.count} old log files"
+    end
+
+    def get_older_log_files
+      get_all_log_files.select do |file|
+        File.mtime(file) < Time.now - MAX_AGE
       end
     end
 
