@@ -72,6 +72,7 @@ module Supper
       }
     ensure
       summarize_and_log_run
+      clear_temp_files
     end
 
 
@@ -108,6 +109,16 @@ module Supper
       f = File.open File.join(log_dir, @log[:time]+'.json'), 'w'
       f.write @log.to_json
       f.close
+    end
+
+    def clear_temp_files
+      get_all_temp_files.each do |file|
+        File.delete file
+      end
+    end
+
+    def get_all_temp_files
+      Dir.glob SupplierFeed::PREFIX+'*'
     end
   end
 end
