@@ -1,4 +1,5 @@
 require 'shopify_api'
+require 'supper/variant'
 
 module Supper
   class Collection
