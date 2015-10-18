@@ -29,6 +29,10 @@ shopify:
   collection_id: 1234567890
   collection_type: smart
   app_type: private
+  exclusions:
+    tag:
+      - Exclude This Tag
+      - Exclude This Other Tag
 admin_email: email@example.com
     _YAML_
   end

@@ -9,6 +9,7 @@ require 'supper/csv_feed'
 require 'supper/txt_feed'
 require 'supper/inventory'
 require 'supper/variant'
+require 'supper/variant_filter'
 
 module Supper
   class Base
@@ -52,14 +53,11 @@ module Supper
       @log[:inventory] = inventory.to_h
 
       # Update each product/variant based on inventory
-      variants.each do |variant|
-        unless variant.sku.empty?
-          quantity = inventory[variant.sku]
-          unless quantity.nil?
-            variant.update_drop_ship_availability! (quantity > 0)
-            sleep @seconds_between_calls if variant.updated?
-          end
-        end
+      filter = VariantFilter.new @config, inventory
+      filter.filter_variants( variants ).each do |variant|
+        quantity = inventory[variant.sku]
+        variant.update_drop_ship_availability! (quantity > 0)
+        sleep @seconds_between_calls if variant.updated?
       end
 
       @log[:variants] = variants.map(&:to_h)

@@ -37,9 +37,10 @@ RSpec.describe Supper::Base do
   let(:variant4) { double('variant4') }
   let(:variants) { [variant1, variant2, variant3, variant4] }
 
-  describe '#update_drop_ship_availability!' do
+  describe '#update_shopify_supplier_inventory!' do
     it 'updates multiple variants with correct values' do
       inventory = double('inventory')
+      filter = double('filter')
 
       expect( Supper::Collection ).to receive(:get_variants).once.
         with( 1234567890, :smart ).and_return( variants )
@@ -49,35 +50,23 @@ RSpec.describe Supper::Base do
       expect( inventory ).to receive(:compile).once
       expect( inventory ).to receive(:to_h).once.and_return( {} )
 
-      # Empty SKU: shouldn't check inventory
-      expect( variant1 ).to receive(:sku).once.and_return ''
-      expect( variant1 ).not_to receive( :update_drop_ship_availability! )
+      expect( Supper::VariantFilter ).to receive(:new).
+        with( config, inventory ).and_return( filter )
+      expect( filter ).to receive(:filter_variants).with(variants).and_return [variant1, variant2]
 
-      # Non-empty SKU, available:
-      #  - check inventory with SKU
-      #  - update with true
-      expect( variant2 ).to receive(:sku).twice.and_return 'asdf'
-      expect( inventory ).to receive(:[]).with('asdf').and_return 3
-      expect( variant2 ).to receive( :update_drop_ship_availability! ).once.
-        with(true)
+      expect( variant1 ).to receive(:sku).and_return 'SKU1'
+      expect( inventory ).to receive(:[]).with( 'SKU1' ).and_return 0
+      expect( variant1 ).to receive(:update_drop_ship_availability!).once.with false
 
-      # Non-empty SKU, unavailable:
-      #  - check inventory with SKU
-      #  - update with false
-      expect( variant3 ).to receive(:sku).twice.and_return 'foo bar'
-      expect( inventory ).to receive(:[]).with('foo bar').and_return 0
-      expect( variant3 ).to receive( :update_drop_ship_availability! ).once.
-        with(false)
+      expect( variant2 ).to receive(:sku).and_return 'SKU2'
+      expect( inventory ).to receive(:[]).with( 'SKU2' ).and_return 3
+      expect( variant2 ).to receive(:update_drop_ship_availability!).once.with true
 
-      # Non-empty SKU, missing from inventory:
-      #  - check inventory with SKU
-      #  - don't update
-      expect( variant4 ).to receive(:sku).twice.and_return 'SKUUU'
-      expect( inventory ).to receive(:[]).with('SKUUU').and_return nil
-      expect( variant4 ).not_to receive( :update_drop_ship_availability! )
+      expect( variant3 ).not_to receive :update_drop_ship_availability!
+      expect( variant4 ).not_to receive :update_drop_ship_availability!
 
       # Logging stuff
-      [variant1, variant2, variant3, variant4].each do |v|
+      [variant1, variant2].each do |v|
         expect(v).to receive(:to_h).once.and_return({})
         allow(v).to receive(:updated?).once.and_return(false) # this just
       end

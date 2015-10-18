@@ -41,6 +41,12 @@ RSpec.describe Supper::Config do
       expect( suppliers[1]['ftp_user'] ).to eq 'janes_client'
       expect( suppliers[1]['ftp_password'] ).to eq 'asdf1234'
       expect( suppliers[1]['shopify_tag'] ).to eq 'Jane'
+
+      shopify = config['shopify']
+      expect( shopify['api_key'] ).to eq 'YOUR_API_KEY_HERE'
+      expect( shopify['api_password'] ).to eq 'YOUR_API_PASSWORD_HERE'
+      expect( shopify['exclusions'] ).to be_a Hash
+      expect( shopify['exclusions']['tag'] ).to eq ['Exclude This Tag', 'Exclude This Other Tag']
     end
   end
 end
