@@ -1,6 +1,8 @@
 # Supper (Beta)
 
-Supper automatically updates *inventory policy* settings for individual Shopify product variants based on inventory levels of your suppliers. This is really useful for use-cases like "drop shipping," where you have in-store stock that may run out, and you may or may not also have suppliers who can ship direct to your customers. Specify your credentials in YAML, tell it which collection of products to keep in sync, and let Supper handle the REST.
+Supper automatically updates *inventory policy* settings for individual Shopify product variants based on inventory levels of your suppliers. This is really useful for use-cases like "drop shipping," where you have in-store stock that may run out, but you also have suppliers who may be able to ship direct to your customers, as *their* inventory levels allow.
+
+Specify your credentials in YAML, tell it which collection of products to keep in sync, and let Supper handle the REST.
 
 Supper is written in Ruby and uses [the official Shopify API gem](https://github.com/Shopify/shopify_api) to talk to your Shopify store via the REST API. It is a self-hosted app that you can set up to run automatically or manually, at your discretion.
 
