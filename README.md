@@ -8,10 +8,14 @@ Supper is written in Ruby and uses [the official Shopify API gem](https://github
 
 ## How it works:
 
+Supper is based on the idea of a "feedable" collection: some [collection of products](https://help.shopify.com/manual/products/collections) that you set up on the Shopify side to represent the products you want Supper to keep in sync with your suppliers!
+
+
+* You set up a Shopify collection
 * You clone Supper onto your server/laptop/Raspberry Pi/whatever running Ruby
 * You configure and run it (see below)
-* Supper requests products in the "feedable" collection (you can set an arbitrary `collection_id` in your config file).
-* For each supplier you configure, Supper:
+* Each time it runs, Supper requests products in the "feedable" collection (you can set an arbitrary `collection_id` in your config file).
+* Then, for each supplier you configure, Supper:
   * requests inventory via FTP
   * matches each feedable product *variant* to a line in the supplier inventory file by SKU
   * determines the availability of each product variant, and updates Shopify's `inventory_policy` field for that variant as necessary
@@ -20,6 +24,7 @@ Supper is written in Ruby and uses [the official Shopify API gem](https://github
 
 * Ruby (tested with 1.9.3)
 * Bundler
+* A Shopify collection of feedable products (Supper wants its ID)
 
 ## Installation
 
