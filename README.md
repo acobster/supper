@@ -6,7 +6,7 @@ Specify your credentials in YAML, tell it which collection of products to keep i
 
 Supper is written in Ruby and uses [the official Shopify API gem](https://github.com/Shopify/shopify_api) to talk to your Shopify store via the REST API. It is a self-hosted app that you can set up to run automatically or manually, at your discretion.
 
-## How it works:
+## How it works
 
 Supper is based on the idea of a "feedable" collection: some [collection of products](https://help.shopify.com/manual/products/collections) that you set up on the Shopify side to represent the products you want Supper to keep in sync with your suppliers!
 
